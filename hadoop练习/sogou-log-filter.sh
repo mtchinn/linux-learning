@@ -1,5 +1,6 @@
 #! /bin/bash
 #1.3 data filter
+
 FROMFILE=$1
 TOFILE=$2
 
@@ -11,8 +12,8 @@ if [ ! $# -eq 2 ];then
 	exit 1
 fi
 
-sed '/^.*\t.*\t.*\t.*\t[:blank:]*\t/d' $FROMFILE &>$TOFILE
-sed -i '/^.*\t.*\t.*\t.*\t.*\t[:blank:]*\t/d' $TOFILE
+sed '/^.*\t[:blank:]*\t/d' $FROMFILE &>$TOFILE
+sed -i '/^.*\t.*\t[:blank:]*\t/d' $TOFILE
 
 #while read LINE;do
 #	MYUID=`echo $LINE | cut -f5`

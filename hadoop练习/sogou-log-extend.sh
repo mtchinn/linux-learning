@@ -1,5 +1,6 @@
 #! /bin/bash
-
+# 1.2 data extend
+# 到2.2时发现，理解错了，将年月日时拆分放在最后面就好了
 FROMFILE=$1
 TOFILE=$2
 
@@ -7,7 +8,7 @@ if [ ! $# -eq 2 ];then
 	echo "USAGE: COMMAND FROMFILE TOFILE"
 	exit 1
 fi
-
+TS=`cut -f1 $FROMFILE &>T.TS`
 YEAR=`cut -b1-4 $FROMFILE &>T.YEAR`
 MONTH=`cut -b5-6 $FROMFILE &>T.MONTH`
 DAY=`cut -b7-8 $FROMFILE &>T.DAY`
@@ -18,6 +19,6 @@ RANK=`cut -f4 $FROMFILE &>T.RANK`
 CLICKSEQ=`cut -f5 $FROMFILE &>T.CLICKSEQ`
 URL=`cut -f6 $FROMFILE &>T.URL`
 
-paste -d'\t' T.YEAR T.MONTH T.DAY T.HOUR T.MYUID T.WORD T.RANK T.CLICKSEQ T.URL &>$TOFILE
+paste -d'\t' T.TS T.MYUID T.WORD T.RANK T.CLICKSEQ T.URL T.YEAR T.MONTH T.DAY T.HOUR &>$TOFILE
 
-rm -rf T.YEAR T.MONTH T.DAY T.HOUR T.MYUID T.WORD T.RANK T.CLICKSEQ T.URL 
+rm -rf T.TS T.MYUID T.WORD T.RANK T.CLICKSEQ T.URL T.YEAR T.MONTH T.DAY T.HOUR
